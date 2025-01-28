@@ -1,0 +1,407 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+/* Define color variables */
+:root {
+    --primary-bg-color: #333;      /* Background color for navbar and content box */
+    --primary-text-color: white;    /* Text color for navbar and links */
+    --hover-bg-color: #444;        /* Background color for links when hovered */
+    --hover-text-color: #f39c12;    /* Text color for links when hovered */
+    --underline-color: #f39c12;    /* Color for the underline animation on navbar links */
+    --border-color: #666;          /* Border color for list items in content box */
+}
+
+/* Basic styles for the navbar */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-bg-color);
+    color: var(--primary-text-color);
+    padding: 0 20px;
+    height: 120px;
+    position: fixed;
+    z-index: 20;
+}
+
+/* Navbar left (logo and university name) */
+.navbar-left {
+    display: flex;
+    align-items: center;
+    width: 30%;
+}
+
+.logo {
+    height: 50px;  /* Adjusted logo height */
+    margin-right: 10px;
+}
+
+.university-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* Navbar right (menu items) */
+.navbar-right {
+    width: 70%;
+}
+
+.navbar-right ul {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    height: 100%;
+    align-items: center;
+}
+
+.navbar-right li {
+    position: relative;
+    margin-left: 35px;
+}
+
+/* Styling for navbar links */
+.navbar-right a {
+    color: var(--primary-text-color);
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 5px 0;
+    position: relative;
+    display: inline-block;
+}
+
+/* Underline animation on hover */
+.navbar-right a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: var(--underline-color);
+    bottom: 0;
+    left: 50%;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.navbar-right a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* Content box styling */
+.content-box {
+    display: none;
+    position: absolute;
+    top: 100%;  /* Adjusted to position the content box directly below the navbar */
+    left: 50%;  /* Centralized horizontally */
+    transform: translateX(-50%);  /* Adjusted to centralize it */
+    width: 250px;
+    background-color: var(--hover-bg-color);
+    padding: 10px;
+    color: var(--primary-text-color);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    max-height: inherit;
+    overflow-y: auto;
+    border-radius: 8px;  /* Optional: add rounded corners for the content box */
+}
+
+/* Show content box when hovering over the menu item */
+.navbar-right li:hover .content-box {
+    display: block;
+}
+
+/* Styling for the list in content boxes - vertical alignment */
+.content-box ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: block;
+}
+
+.content-box li {
+    margin: auto;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Styling for links in content box */
+.content-box li a {
+    color: var(--primary-text-color);
+    text-decoration: none;
+    display: block;
+    padding: 5px 0;
+}
+
+/* Hover effect for links in the content box */
+.content-box li a:hover {
+    color: var(--hover-text-color);  /* Change text color on hover */
+    background-color: var(--primary-bg-color);  /* Optional: background color on hover */
+}
+
+/* Optional: Add a background color for the navbar when hovering over */
+.navbar-right li:hover {
+    background-color: var(--hover-bg-color);
+}
+
+/* Main content styling */
+.main-content {
+    background-color: rgb(221, 219, 219);
+    position: absolute;
+    top: 20%;
+}
+
+/* Section 1 styling */
+.section1 {
+    width: 100vw;
+    height: 100vh;
+    position: relative; /* Necessary for welcome-message positioning */
+}
+
+/* Carousel as Background */
+.carousel {
+    position: absolute; /* Allows welcome-message to overlap */
+    top: 0;
+    left: 0;
+    width: 100vw; 
+    height: 80vh;
+    overflow: hidden; 
+    z-index: 1; /* Behind welcome-message */
+}
+
+.carousel-images {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-images img {
+    width: 100vw; 
+    height: 100vh; 
+    object-fit: cover; /* Ensures the image fills the container while maintaining aspect ratio */
+}
+
+/* Navigation buttons (prev & next) */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 2rem;
+    z-index: 2; /* Above carousel */
+    border-radius: 50%;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.prev {
+    left: 20px;
+}
+
+.next {
+    right: 20px;
+}
+
+/* Dots for carousel */
+.carousel-dots {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    z-index: 2; /* Above carousel */
+}
+
+.dot {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin: 0 5px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active,
+.dot:hover {
+    background-color: #f39c12;
+}
+
+/* Welcome Message (Overlapping the Carousel) */
+.introduction-message {
+    position: absolute; /* Overlaps the carousel */
+    top: 15%; /* Adjust for vertical positioning */
+    left: 10%; /* Horizontal positioning */
+    z-index: 3; /* Above carousel and its elements */
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background for readability */
+    color: white;
+    padding: 20px;
+    max-width: 500px; /* Restrict width for better readability */
+    border-radius: 10px; /* Optional: Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Optional: Add subtle shadow */
+}
+
+.introduction-message h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.introduction-message p {
+    font-size: 1.0rem;
+    line-height: 1.5;
+}
+
+/* Section 2 styling */
+.section2 {
+    width: 100%;
+    height: 110vh;
+    display: flex;
+    justify-content: center;
+}
+
+/* Main content container with 80% width */
+.welcome-container {
+    width: 80%;
+    height: 90vh;
+    display: flex;
+    margin: auto;
+    padding-top: 20px;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background for readability */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    color: white;
+}
+
+/* Style for the image container, 30% width */
+.dean-pic {
+    width: 30%;
+    margin-right: 30px;
+    margin-top: 20px;
+}
+
+.dean-pic img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* Style for the text section, 70% width */
+.welcome-message {
+    margin-top: 50px;
+    margin-left: 30px;
+    width: 50%;
+    color: white;
+}
+
+.welcome-message h2:first-of-type {
+    font-weight: normal;
+    font-size: 1.6rem;
+}
+
+.welcome-message h2 {
+    margin-bottom: 10px;
+    font-size: 1.6rem;
+}
+
+.welcome-message .quote {
+    font-size: 4rem;
+}
+
+.welcome-message p:first-of-type {
+    margin-top: -35px;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.welcome-message p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--hover-text-color);
+}
+
+/* Section 3 styling */
+.section3 {
+    width: 85%;
+    margin: 0 auto;
+}
+
+.news-header {
+    display: flex;
+    align-items: center;
+}
+
+.news-title {
+    font-size: 2.6rem;
+    font-weight: bold;
+    margin: auto;
+    color: var(--hover-text-color);
+}
+
+.news-divider {
+    width: 100%;
+    border: 5px solid #cccccc;
+    margin: 20px 0;
+}
+
+.news-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+.news-item {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    align-items: center;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.news-item:hover {
+    background-color: rgb(255, 204, 109);
+}
+
+.news-date h3 {
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+
+.news-details h4 {
+    font-size: 22px;
+    color: #0073e6;
+}
+
+.news-details p {
+    font-size: 16px;
+    color: #666;
+}
+
+.news-details a {
+    color: #0073e6;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.news-details a:hover {
+    text-decoration: underline;
+}
